@@ -1,0 +1,6 @@
+setup:
+install pip packages of 'transformers', 'torch'
+configure parameters such as batch size, number of epochs, etc at top of main.py file
+
+to run:
+python3.9 main.py
