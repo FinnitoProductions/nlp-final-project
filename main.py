@@ -107,10 +107,13 @@ def train_model(iop, longest_input_len, unique_outputs, i):
 
 def test_model(rlc, iop, file_name, unique_outputs):
     correct_count = 0
+    
     female_bias_titles = {'yoga_teacher': 0, 'personal_trainer': 0, 'model': 0, 'teacher': 0, 'professor': 0, 'software_engineer': 0, 'attorney': 0, 'physician': 0, 'nurse': 0}
     male_bias_titles = {'yoga_teacher': 0, 'personal_trainer': 0, 'model': 0, 'teacher': 0, 'professor': 0, 'software_engineer': 0, 'attorney': 0, 'physician': 0, 'nurse': 0}
+    
     female_incorrect = 0
     male_incorrect = 0
+    
     female_incorrect_on = {'composer': 0, 'poet': 0, 'psychologist': 0, 'attorney': 0, 'filmmaker': 0, 'software_engineer': 0, 'personal_trainer': 0, 'rapper': 0, 'photographer': 0, 'surgeon': 0, 'accountant': 0, 'architect': 0, 'physician': 0, 'comedian': 0, 'dietitian': 0, 'paralegal': 0, 'dj': 0, 'teacher': 0, 'nurse': 0, 'professor': 0, 'pastor': 0, 'interior_designer': 0, 'yoga_teacher': 0, 'dentist': 0, 'model': 0, 'journalist': 0, 'chiropractor': 0, 'painter': 0}
     male_incorrect_on = {'composer': 0, 'poet': 0, 'psychologist': 0, 'attorney': 0, 'filmmaker': 0, 'software_engineer': 0, 'personal_trainer': 0, 'rapper': 0, 'photographer': 0, 'surgeon': 0, 'accountant': 0, 'architect': 0, 'physician': 0, 'comedian': 0, 'dietitian': 0, 'paralegal': 0, 'dj': 0, 'teacher': 0, 'nurse': 0, 'professor': 0, 'pastor': 0, 'interior_designer': 0, 'yoga_teacher': 0, 'dentist': 0, 'model': 0, 'journalist': 0, 'chiropractor': 0, 'painter': 0}
     for test_data in iop:
@@ -136,8 +139,9 @@ def test_model(rlc, iop, file_name, unique_outputs):
             else:
                 male_incorrect = 0
                 male_incorrect_on[unique_outputs[test_data['output']]] += 1
-        print('cool')
+
     print('correct: ', correct_count, 'total: ', len(iop), 'accuracy: ', correct_count / len(iop))
+
     with open(file_name, 'w') as f:
         f.write('correct: %d, total: %d, accuracy: %d' % (correct_count, len(iop), correct_count / len(iop)))
         f.write('male_incorrect: %d' % male_incorrect)
@@ -146,6 +150,8 @@ def test_model(rlc, iop, file_name, unique_outputs):
         f.write('female_incorrect_on: %s' % str(female_incorrect_on))
         f.write('male titles: %s' % str(male_bias_titles))
         f.write('female titles: %s' % str(female_bias_titles))
+
     return rlc
 
-main()
+if __name__ == "__main__":
+    main()
